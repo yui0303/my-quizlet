@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { NextUIProvider } from "@nextui-org/react";
+import SideBar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <body className={inter.className}>
+        <NextUIProvider>
+          <Navbar />
+          <div className="flex">
+            <SideBar className="w-48" />
+            <div className="flex-grow">
+              {children}
+            </div>
+          </div>
+        </NextUIProvider>
+      </body>
+    </html >
   );
 }
